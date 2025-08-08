@@ -1,0 +1,25 @@
+network:
+        version: 2
+        renderer: networkd
+        bonds:
+          bond0:
+            interfaces:
+             - ens3
+             - ens4
+            parameters:
+              mode: 802.3ad
+              transmit-hash-policy: layer3+4
+            dhcp4: no
+            addresses: [192.168.1.100/24]  # Replace with your desired static IP
+            routes:
+            - to: default
+              via: 192.168.10.254
+            nameservers:
+               addresses: [1.1.1.1]
+        ethernets:
+          ens3:
+            dhcp4: no
+            # Other configurations for eno1 can go here if needed, e.g., VLANs.
+          ens4:
+            dhcp4: no
+            # Other configurations for eno2 can go here if needed, e.g., VLANs.
